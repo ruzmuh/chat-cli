@@ -9,7 +9,6 @@ import (
 )
 
 var (
-	configFilePath string
 	listModelsFlag bool
 	initFlag       bool
 	versionFlag    bool
@@ -20,7 +19,6 @@ func init() {
 		fmt.Printf("Usage:\n  %s [flags] \"<propmt>\"\n  FLAGS:\n", os.Args[0])
 		flag.PrintDefaults()
 	}
-	flag.StringVar(&configFilePath, "conf", "$HOME/.config/chat/", "config file location w/o filename (eg. '/etc/chat/'). Config file must be named 'config.yml'.")
 	flag.BoolVar(&listModelsFlag, "list-models", false, "list available models and exit")
 	flag.BoolVar(&initFlag, "init", false, "init config")
 	flag.BoolVar(&versionFlag, "version", false, "print version and exit")
