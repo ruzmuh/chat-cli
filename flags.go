@@ -8,27 +8,36 @@ import (
 	"github.com/spf13/viper"
 )
 
+const (
+	codeOnlyFlagName   = "codeonly"
+	initFlagName       = "init"
+	listModelsFlagName = "list-models"
+	modelFlagName      = "model"
+	tokenFlagName      = "token"
+	versionFlagName    = "version"
+)
+
 var (
-	listModelsFlag bool
 	initFlag       bool
+	listModelsFlag bool
 	versionFlag    bool
 )
 
 func init() {
 	flag.Usage = func() {
-		fmt.Printf("Usage:\n  %s [flags] \"<propmt>\"\n  FLAGS:\n", os.Args[0])
+		fmt.Printf("USAGE:\n  %s [flags] \"<propmt>\"\nFLAGS:\n", os.Args[0])
 		flag.PrintDefaults()
 	}
-	flag.BoolVar(&listModelsFlag, "list-models", false, "list available models and exit")
-	flag.BoolVar(&initFlag, "init", false, "init config")
-	flag.BoolVar(&versionFlag, "version", false, "print version and exit")
+	flag.BoolVar(&listModelsFlag, listModelsFlagName, false, "list available models and exit")
+	flag.BoolVar(&initFlag, initFlagName, false, "init config")
+	flag.BoolVar(&versionFlag, versionFlagName, false, "print version and exit")
 
-	flag.String("model", "", "selected model")
-	flag.String("token", "", "your openAI token")
-	flag.Bool("codeonly", false, "print first code snipet from the answer")
+	flag.String(modelFlagName, "", "selected model")
+	flag.String(tokenFlagName, "", "your openAI token")
+	flag.Bool(codeOnlyFlagName, false, "print first code snipet from the answer")
 	flag.Parse()
 
-	viper.BindPFlag("model", flag.Lookup("model"))
-	viper.BindPFlag("token", flag.Lookup("token"))
-	viper.BindPFlag("codeonly", flag.Lookup("codeonly"))
+	viper.BindPFlag(modelFlagName, flag.Lookup(modelFlagName))
+	viper.BindPFlag(tokenFlagName, flag.Lookup(tokenFlagName))
+	viper.BindPFlag(codeOnlyFlagName, flag.Lookup(codeOnlyFlagName))
 }
