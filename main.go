@@ -16,10 +16,6 @@ var (
 )
 
 func main() {
-	NewConfig()
-	prompt := flag.Arg(0)
-
-	client = openai.NewClient(viper.GetString(tokenFlagName))
 
 	if versionFlag {
 		fmt.Print(Version)
@@ -28,6 +24,10 @@ func main() {
 	if initFlag {
 		initConfig()
 	}
+	NewConfig()
+	prompt := flag.Arg(0)
+
+	client = openai.NewClient(viper.GetString(tokenFlagName))
 
 	bar := initAndRunProgressbar()
 	defer bar.Finish()
